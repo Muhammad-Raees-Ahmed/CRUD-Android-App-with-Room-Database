@@ -2,11 +2,14 @@ package com.example.crudapproomdatabase.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.crudapproomdatabase.Model.DatabaseClient;
 import com.example.crudapproomdatabase.Model.Task;
 import com.example.crudapproomdatabase.R;
 import com.example.crudapproomdatabase.databinding.ActivityAddTaskBinding;
@@ -66,16 +69,26 @@ public class AddTaskActivity extends AppCompatActivity {
                 task.setFinishBy(sFinishBy);
                 task.setFinished(false);
 
-
+//adding to database
+                DatabaseClient.getInstance(getApplicationContext())
+                        .getAppDatabase()
+                        .taskDAO()
+                        .insert(task);
                 return null;
             }
 
             @Override
             protected void onPostExecute(Void unused) {
                 super.onPostExecute(unused);
+                finish();
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
             }
         }
+        SaveTask st = new SaveTask();
+        st.execute();
     }
+
 
 
 }
