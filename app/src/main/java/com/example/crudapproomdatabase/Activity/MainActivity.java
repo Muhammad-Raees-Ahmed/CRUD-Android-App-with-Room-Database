@@ -1,8 +1,10 @@
-package com.example.crudapproomdatabase;
+package com.example.crudapproomdatabase.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.crudapproomdatabase.R;
 
 public class MainActivity extends AppCompatActivity {
 
