@@ -7,17 +7,17 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/images"
+        android:label="@string/app_name1"
+        android:roundIcon="@drawable/images"
         android:supportsRtl="true"
         android:theme="@style/Theme.CRUDAppRoomDatabase"
         tools:targetApi="31">
         <activity
-            android:name=".UpdateTaskActivity"
+            android:name=".Activity.UpdateTaskActivity"
             android:exported="false" />
         <activity
-            android:name=".AddTaskActivity"
+            android:name=".Activity.AddTaskActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.MainActivity"

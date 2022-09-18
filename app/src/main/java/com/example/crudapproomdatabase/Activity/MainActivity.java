@@ -1,19 +1,20 @@
 package com.example.crudapproomdatabase.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.view.View;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.crudapproomdatabase.Adapter.TaskAdapter;
 import com.example.crudapproomdatabase.Model.DatabaseClient;
 import com.example.crudapproomdatabase.Model.Task;
 import com.example.crudapproomdatabase.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         recyclerView = findViewById(R.id.recyclerview_tasks);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -54,16 +57,23 @@ public class MainActivity extends AppCompatActivity {
                         .getAppDatabase()
                         .taskDAO()
                         .getAll();
+                System.out.println("tasks : "+taskList);
                 return taskList;
             }
+
 
             @Override
             protected void onPostExecute(List<Task> tasks) {
                 super.onPostExecute(tasks);
+                Toast.makeText(MainActivity.this, tasks.toString(), Toast.LENGTH_SHORT).show();
                 TaskAdapter taskAdapter=new TaskAdapter(MainActivity.this,tasks);
+                recyclerView.setAdapter(taskAdapter);
             }
         }
         GetTasks getTasks=new GetTasks();
         getTasks.execute();
+
+
     }
+
 }

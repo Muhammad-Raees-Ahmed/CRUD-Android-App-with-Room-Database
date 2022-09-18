@@ -1,7 +1,5 @@
 package com.example.crudapproomdatabase.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,9 +7,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.crudapproomdatabase.Model.DatabaseClient;
 import com.example.crudapproomdatabase.Model.Task;
-import com.example.crudapproomdatabase.R;
 import com.example.crudapproomdatabase.databinding.ActivityAddTaskBinding;
 
 public class AddTaskActivity extends AppCompatActivity {
@@ -58,12 +57,12 @@ public class AddTaskActivity extends AppCompatActivity {
             return;
         }
         class  SaveTask extends AsyncTask<Void,Void,Void>{
-
+            Task task;
             @Override
             protected Void doInBackground(Void... voids) {
 
                 //creating a task
-                Task task=new Task();
+                task=new Task();
                 task.setTask(sTask);
                 task.setDesc(sDesc);
                 task.setFinishBy(sFinishBy);
@@ -74,6 +73,7 @@ public class AddTaskActivity extends AppCompatActivity {
                         .getAppDatabase()
                         .taskDAO()
                         .insert(task);
+
                 return null;
             }
 
@@ -81,6 +81,7 @@ public class AddTaskActivity extends AppCompatActivity {
             protected void onPostExecute(Void unused) {
                 super.onPostExecute(unused);
                 finish();
+
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
                 Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
             }
