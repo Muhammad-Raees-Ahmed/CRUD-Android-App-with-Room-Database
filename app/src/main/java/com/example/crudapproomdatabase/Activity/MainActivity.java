@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -65,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(List<Task> tasks) {
                 super.onPostExecute(tasks);
-                Toast.makeText(MainActivity.this, tasks.toString(), Toast.LENGTH_SHORT).show();
+
                 TaskAdapter taskAdapter=new TaskAdapter(MainActivity.this,tasks);
                 recyclerView.setAdapter(taskAdapter);
             }
