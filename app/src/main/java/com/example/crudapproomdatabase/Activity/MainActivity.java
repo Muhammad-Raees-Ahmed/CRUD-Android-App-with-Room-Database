@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,15 +22,19 @@ public class MainActivity extends AppCompatActivity {
 
     private FloatingActionButton buttonAddTask;
     private RecyclerView recyclerView;
+    SearchView searchView;
+    TaskAdapter taskAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getTasks();
 
 
         recyclerView = findViewById(R.id.recyclerview_tasks);
+        searchView=findViewById(R.id.searchview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         buttonAddTask = findViewById(R.id.floating_button_add);
@@ -42,7 +47,20 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        getTasks();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                taskAdapter.getFilter().filter(s);
+                return true;
+            }
+        });
+
+
     }
 
     private void getTasks() {
@@ -65,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             protected void onPostExecute(List<Task> tasks) {
                 super.onPostExecute(tasks);
 
-                TaskAdapter taskAdapter=new TaskAdapter(MainActivity.this,tasks);
+                taskAdapter  =new TaskAdapter(MainActivity.this,tasks);
                 recyclerView.setAdapter(taskAdapter);
             }
         }
