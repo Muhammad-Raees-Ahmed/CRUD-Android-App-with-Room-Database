@@ -5,9 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp"
+    android:orientation="vertical"
     tools:context=".Activity.MainActivity">
 
+    <SearchView
+        android:id="@+id/searchview"
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:iconifiedByDefault="false"
+        android:queryHint="search" />
+
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@+id/searchview"
         android:id="@+id/recyclerview_tasks"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
