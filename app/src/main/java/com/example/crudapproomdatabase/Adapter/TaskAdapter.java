@@ -59,6 +59,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     public Filter getFilter() {
         return MyFilter;
     }
+
     private Filter MyFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {

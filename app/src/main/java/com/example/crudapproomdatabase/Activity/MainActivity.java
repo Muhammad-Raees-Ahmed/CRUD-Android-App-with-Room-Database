@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
     private void getTasks() {
 
         class GetTasks extends AsyncTask<Void, Void, List<Task>> {
-
             @Override
             protected List<Task> doInBackground(Void... voids) {
                 List<Task> taskList = DatabaseClient
